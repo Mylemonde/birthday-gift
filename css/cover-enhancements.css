@@ -1,0 +1,58 @@
+/* 礼物封面：星云、星轨与纪念卡片 */
+body:not(.opened) > .copy,
+body:not(.opened) > header { visibility: hidden; }
+#cover { isolation:isolate; overflow:hidden; background:radial-gradient(ellipse at 50% 53%,#452641e8 0%,#1b1228ee 50%,#08060ff5 100%); }
+.cover-atmosphere { position:absolute; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+.nebula { position:absolute; width:70vw; height:60vh; border-radius:50%; filter:blur(75px); opacity:.15; animation:nebula-drift 18s ease-in-out infinite alternate; }
+.nebula-pink { left:-20%; top:5%; background:#bd679d; }
+.nebula-blue { right:-25%; bottom:0; background:#6764b8; animation-delay:-9s; }
+.cover-date { position:absolute; top:38px; left:50%; transform:translateX(-50%); color:#ddbed1; font-size:10px; letter-spacing:5px; white-space:nowrap; }
+.cover-date:before,.cover-date:after { content:'—'; padding:0 14px; color:#a782a3; }
+.cover-kicker { letter-spacing:7px; font-size:9px; color:#d1a7c1; }
+.cover-title { margin-bottom:56px; line-height:1.7; }
+.cover-description { margin:-40px 20px 52px; color:#bb9bb3; font-size:12px; letter-spacing:2px; text-align:center; line-height:1.9; }
+#gift { z-index:3; }
+#gift:before { content:''; position:absolute; width:260px; height:260px; left:-35px; top:-25px; border-radius:50%; background:radial-gradient(circle,#e5abc72a,transparent 68%); animation:gift-aura 4s ease-in-out infinite; pointer-events:none; }
+.gift-orbits { position:absolute; width:350px; height:280px; left:50%; top:53%; transform:translate(-50%,-50%); pointer-events:none; z-index:-1; }
+.gift-orbits i { position:absolute; inset:12px -20px; border:1px solid #efc4d629; border-radius:50%; transform:rotate(-25deg); }
+.gift-orbits i:nth-child(2) { inset:-20px 32px; transform:rotate(35deg); border-color:#c3b2f021; }
+.gift-orbits i:after { content:'✦'; position:absolute; left:14%; top:4%; color:#edccad; font-size:13px; text-shadow:0 0 12px #ffe1c2; animation:twinkle 3s infinite; }
+.gift-orbits i:nth-child(2):after { left:86%; top:76%; color:#e6b9da; animation-delay:1s; }
+.wish { position:absolute; color:#e7c8da; font:italic 12px Georgia,serif; letter-spacing:2px; opacity:.55; animation:wish-float 7s ease-in-out infinite; }
+.wish-one { left:9%; top:39%; transform:rotate(-12deg); }
+.wish-two { right:8%; top:65%; animation-delay:-3s; }
+.cover-heart { position:absolute; color:#edb5d3; opacity:.16; font:24px Georgia; animation:heart-rise 12s linear infinite; left:var(--left); animation-delay:var(--delay); bottom:-40px; }
+.cover-note { margin-top:45px; letter-spacing:3px; color:#ead1df; font-size:11px; }
+.cover-note:after { content:''; display:block; width:5px; height:5px; margin:14px auto 0; border-radius:50%; background:#ebbed7; box-shadow:0 0 12px #e2abd1; animation:twinkle 2s infinite; }
+.birthday-keepsake { display:flex; align-items:center; gap:19px; margin-top:25px; padding:13px 22px; border:1px solid #dfafcc25; border-radius:12px; background:#e7bad405; }
+.keepsake-age { font:italic 39px Georgia,serif; line-height:1; color:#e8bdcf; }
+.keepsake-copy { text-align:left; border-left:1px solid #d1a9c533; padding-left:17px; }
+.keepsake-copy b { display:block; font-size:10px; font-weight:400; color:#d7bbcd; letter-spacing:3px; }
+.keepsake-copy span { display:block; margin-top:7px; color:#a88ba2; font-size:10px; letter-spacing:1px; }
+.cover-foot { bottom:25px; font-size:11px; }
+@keyframes nebula-drift { to { transform:translate(12%,8%) scale(1.2); } }
+@keyframes gift-aura { 50% { opacity:.45; transform:scale(1.15); } }
+@keyframes wish-float { 50% { translate:0 -12px; opacity:.3; } }
+@keyframes heart-rise { 0% { transform:translateY(0) rotate(-12deg); opacity:0; } 15%,75% { opacity:.2; } 100% { transform:translate(35px,-100vh) rotate(20deg); opacity:0; } }
+@media(max-width:600px) {
+  .cover-date { top:25px; font-size:8px; letter-spacing:3px; }
+  .cover-title { font-size:26px; margin-bottom:48px; }
+  .cover-description { font-size:10px; margin-top:-37px; margin-bottom:43px; }
+  .gift-orbits { width:275px; height:240px; }
+  .wish { font-size:9px; }
+  .wish-one { left:4%; top:32%; }
+  .wish-two { right:4%; top:70%; }
+  .birthday-keepsake { padding:10px 18px; margin-top:17px; }
+}
+@media(max-height:700px) {
+  .cover-title { margin-bottom:35px; }
+  .cover-description { margin-top:-27px; margin-bottom:20px; }
+  #gift { scale:.85; margin:-10px 0; }
+  .cover-note { margin-top:16px; }
+  .birthday-keepsake { margin-top:10px; padding:8px 17px; }
+  .cover-date { top:15px; }
+  .cover-foot { bottom:10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .nebula,.cover-heart,.wish,#gift:before { animation:none; }
+}
