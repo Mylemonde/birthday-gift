@@ -20,4 +20,4 @@ cakeReference.onload=()=> {
   cakeGrains=arr
 }
 ;
-cakeReference.src='./assets/cake.webp';
+cakeReference.src=CANVAS_ASSETS.cake;

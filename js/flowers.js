@@ -26,10 +26,10 @@ referenceImage.onload=()=> {
   ,(_,i)=>points[Math.floor(rnd(i+109)*points.length)]);
 }
 ;
-referenceImage.src='./assets/flowers.webp';
+referenceImage.src=CANVAS_ASSETS.flowers;
 function drawProvidedRose(now,sec) {
   if(!referencePoints.length)return;
-  let opacity=ease((sec-9)/3)*(1-ease((sec-17)/1.5)),sway=Math.sin(now*.0006)*.035;
+  let opacity=ease((sec-9)/3)*(1-ease((sec-27)/1.5)),sway=Math.sin(now*.0006)*.035;
   ctx.save();
   ctx.globalCompositeOperation='source-over';
   for(let i=0;

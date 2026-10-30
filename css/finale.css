@@ -1,0 +1,7 @@
+/* 照片墙停留后的生日肖像转场 */
+.wall-exit #wall .memory { opacity:0; transform:translateY(-16px) scale(.94); transition:opacity 1.3s ease,transform 1.5s ease; transition-delay:0s; }
+#finalPortrait { position:fixed; z-index:3; top:55%; left:50%; height:min(57vh,620px); max-width:86vw; width:auto; object-fit:contain; border:6px solid #fff0e9; border-radius:5px; box-shadow:0 12px 70px #eab3d933; opacity:0; transform:translate(-50%,-47%) scale(.94); transition:opacity 2.5s ease,transform 3.5s cubic-bezier(.22,1,.36,1); pointer-events:none; }
+.finale-visible #finalPortrait { opacity:1; transform:translate(-50%,-50%) scale(1); }
+.finale-visible #replay { top:calc(55% + min(28.5vh,310px) + 23px); }
+@media(max-width:600px){#finalPortrait{height:54vh;top:54%;border-width:4px}.finale-visible #replay{top:calc(54% + 27vh + 23px)}}
+@media(prefers-reduced-motion:reduce){#finalPortrait,.wall-exit #wall .memory{transition-duration:.01s}}

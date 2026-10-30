@@ -1,3 +1,4 @@
+// 照片墙43.5秒开始，预留3.2秒展开，完整停留15秒，61.7秒淡出，63.2秒显示最终生日照片。
 // 背景音乐：将格格《生日祝福歌》音频放在 HTML 同目录，并命名为 birthday-music.mp3。
 const birthdayMusic = new Audio(MUSIC_URL);
 birthdayMusic.loop = true;
@@ -111,7 +112,7 @@ function render(now) {
     requestAnimationFrame(render);
     return
   }
-  let next=sec<5?'heart':sec<12?'fall':sec<18.5?'flowers':sec<19.5?'black':sec<23.5?'count':sec<33.5?'cake':'photo';
+  let next=sec<5?'heart':sec<12?'fall':sec<28.5?'flowers':sec<29.5?'black':sec<33.5?'count':sec<43.5?'cake':sec<61.7?'photo':sec<63.2?'wall-exit':'finale';
   if(next!==scene) {
     scene=next;
     if(scene==='heart')texts('让所有心动，在此刻绽放','这一场烟火，只为你');
@@ -119,14 +120,18 @@ function render(now) {
     if(scene==='flowers')texts('这一束花，永远为你盛开','愿你被温柔与偏爱包围');
     if(scene==='black'||scene==='count')texts('','');
     if(scene==='cake')texts('22岁，生日快乐','闭上眼睛，许一个甜甜的愿望');
+    if (scene === 'wall-exit') texts('', '');
+    if (scene === 'finale') texts('豆小雨生日快乐！', '');
     if(scene==='photo') {
       texts('我的偏爱，永远是你','愿每一岁的你，都快乐、自由、闪闪发光');
       photo.classList.add('show');
       document.body.classList.add('wall-visible')
     }
   }
+  if (scene === 'wall-exit') document.body.classList.add('wall-exit');
+  if (scene === 'finale') document.body.classList.add('finale-visible');
   if(scene==='count') {
-    let digit=String(3-Math.min(2,Math.floor((sec-19.5)/(4/3))));
+    let digit=String(3-Math.min(2,Math.floor((sec-29.5)/(4/3))));
     if(digit!==lastDigit) {
       lastDigit=digit;
       count.textContent=digit;
@@ -145,7 +150,7 @@ function render(now) {
     ctx.scale(S,S);
     ctx.globalCompositeOperation='lighter';
     let rot=Math.sin(now*.00035)*.22;
-    if(sec<33.5) {
+    if(sec<43.5) {
       for(let i=0;
       i<N;
       i++) {
@@ -174,16 +179,16 @@ function render(now) {
           col=t>.45?r.col:h.col;
           alpha=.65
         }
-        else if(sec<18.5) {
+        else if(sec<28.5) {
           p=r;
           x=p.x;
           y=p.y;
           z=p.z;
           col=p.col;
-          alpha=(.5+.5*Math.pow(Math.sin(now*.002+i*1.7),2))*(1-ease((sec-17)/1.5))
+          alpha=(.5+.5*Math.pow(Math.sin(now*.002+i*1.7),2))*(1-ease((sec-27)/1.5))
         }
-        else if(sec>=23.5) {
-          let t=ease((sec-23.5)/3.5);
+        else if(sec>=33.5) {
+          let t=ease((sec-33.5)/3.5);
           p=cake[(i*7)%cake.length];
           x=mix((rnd(i+6)-.5)*1000,p.x,t);
           y=mix((rnd(i+8)-.5)*850,p.y,t);
@@ -196,7 +201,7 @@ function render(now) {
         let px=(x*Math.cos(rot)+z*Math.sin(rot))*perspective;
         y=(y+z*Math.sin(rot*.35))*perspective;
         let depth=1+(z/1000);
-        ctx.globalAlpha=alpha*(sec>=9&&sec<18.5?1-ease((sec-9)/3):1);
+        ctx.globalAlpha=alpha*(sec>=9&&sec<28.5?1-ease((sec-9)/3):1);
         ctx.fillStyle=col;
         let dot=(.38+rnd(i+100)*.55)*depth;
         ctx.fillRect(px,y,dot,dot);
@@ -206,15 +211,15 @@ function render(now) {
           ctx.fillRect(px,y-2,.5,5)
         }
       }
-      if(sec>=9&&sec<18.5)drawProvidedRose(now,sec);
-      if(sec>=23.5) {
-        let solid=ease((sec-25)/2.5);
+      if(sec>=9&&sec<28.5)drawProvidedRose(now,sec);
+      if(sec>=33.5) {
+        let solid=ease((sec-35)/2.5);
         ctx.save();
         ctx.globalCompositeOperation='source-over';
         ctx.globalAlpha=solid*.94;
         if(cakeReference.complete&&cakeReference.naturalWidth)ctx.drawImage(cakeReference,-233,-280,466,560);
         ctx.restore();
-        let a=ease((sec-23.5)/3.5);
+        let a=ease((sec-33.5)/3.5);
         ctx.globalAlpha=a;
         ctx.shadowBlur=18;
         ctx.shadowColor='#ffb23f';
@@ -228,7 +233,7 @@ function render(now) {
       }
     }
     else {
-      let t=clamp((sec-33.5)/3);
+      let t=clamp((sec-43.5)/3);
       for(let i=0;
       i<1100;
       i++) {
@@ -241,9 +246,9 @@ function render(now) {
     ctx.restore()
   }
   ctx.globalAlpha=1;
-  document.querySelector('#bar').style.width=clamp(sec/39.5)*100+'%';
-  if(sec>=39.5) {
-    document.body.className='opened done wall-visible'
+  document.querySelector('#bar').style.width=clamp(sec/65.7)*100+'%';
+  if(sec>=65.7) {
+    document.body.classList.add('done')
   }
   requestAnimationFrame(render)
 }
