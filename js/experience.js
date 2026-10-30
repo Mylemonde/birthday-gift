@@ -121,7 +121,7 @@ function render(now) {
     if(scene==='black'||scene==='count')texts('','');
     if(scene==='cake')texts('22岁，生日快乐','闭上眼睛，许一个甜甜的愿望');
     if (scene === 'wall-exit') texts('', '');
-    if (scene === 'finale') texts('豆小雨生日快乐！', '');
+    if (scene === 'finale') texts('豆小雨生日快乐！', '愿你被爱包围，勇敢做自己，快乐不止今天。');
     if(scene==='photo') {
       texts('我的偏爱，永远是你','愿每一岁的你，都快乐、自由、闪闪发光');
       photo.classList.add('show');

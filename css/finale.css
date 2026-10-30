@@ -5,3 +5,33 @@
 .finale-visible #replay { top:calc(55% + min(28.5vh,310px) + 23px); }
 @media(max-width:600px){#finalPortrait{height:54vh;top:54%;border-width:4px}.finale-visible #replay{top:calc(54% + 27vh + 23px)}}
 @media(prefers-reduced-motion:reduce){#finalPortrait,.wall-exit #wall .memory{transition-duration:.01s}}
+
+/* 生日终章的装饰，仅在最后照片出现时显示。 */
+#finalCelebration{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 2.5s,visibility 2.5s;overflow:hidden}
+.finale-visible #finalCelebration{opacity:1;visibility:visible}
+.final-halo{position:absolute;width:70vh;height:70vh;left:50%;top:53%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse,#df8dab1e,transparent 68%);animation:final-glow 7s ease-in-out infinite}
+.halo-two{width:88vh;height:88vh;border:1px solid #ecc0da10;background:none;transform:translate(-50%,-50%) rotate(-20deg) scaleX(.75)}
+.final-heading{position:absolute;top:7%;width:100%;text-align:center;font-size:9px;letter-spacing:6px;color:#c99bb6}
+.final-message{position:absolute;top:46%;width:22%;text-align:center;opacity:0;transform:translateY(15px);transition:opacity 2s 1s,transform 2s 1s}
+.finale-visible .final-message{opacity:1;transform:translateY(0)}
+.message-left{left:5%}.message-right{right:5%;transition-delay:1.7s}
+.final-message:before{content:'✧';display:block;color:#e3c5a6;font:24px Georgia;margin-bottom:20px}
+.final-message span{font-size:10px;letter-spacing:3px;color:#ae8ca5}
+.final-message b{display:block;font-weight:300;font-size:clamp(15px,1.7vw,22px);line-height:2.3;letter-spacing:3px;color:#e5c8d9;margin:18px 0}
+.final-message small{font:italic 11px Georgia;color:#a6859c}
+.final-seal{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);font:italic 20px Georgia;color:#d9b4c9;letter-spacing:5px;white-space:nowrap}
+.final-seal i{font-style:normal;font-size:13px}.final-seal small{font:10px 'Microsoft YaHei',sans-serif;letter-spacing:2px;margin-left:12px;color:#aa879e}
+.final-confetti{position:absolute;left:var(--x);top:-30px;color:hsl(var(--hue),65%,80%);animation:final-fall var(--duration) linear infinite;animation-delay:var(--wait);animation-play-state:paused;opacity:0}
+.finale-visible .final-confetti{animation-play-state:running}
+.ribbon-confetti{width:4px;height:9px;border-radius:1px;background:hsl(var(--hue),55%,77%)}
+.heart-confetti{font:16px Georgia}
+.finale-visible #finalPortrait{border-radius:9px;box-shadow:0 20px 70px #0004,0 0 60px #f1b9d52b}
+@keyframes final-fall{0%{transform:translate(0,-30px) rotate(0);opacity:0}10%,75%{opacity:.55}100%{transform:translate(var(--drift),110vh) rotate(310deg);opacity:0}}
+@keyframes final-glow{50%{opacity:.5;scale:1.12}}
+@media(max-width:750px){.final-message{display:none}.final-heading{top:6%;font-size:8px;letter-spacing:4px}.final-seal{bottom:3%;font-size:16px}.final-seal small{font-size:9px;letter-spacing:1px}.finale-visible .copy p{padding:0 20px;font-size:10px}.final-halo{width:90vw;height:90vw}}
+@media(max-height:700px){.final-seal{bottom:2%;font-size:13px}.final-heading{top:4%}}
+@media(prefers-reduced-motion:reduce){.final-confetti{display:none}.final-halo{animation:none}}
+
+/* 结尾沿用原场景的紫黑色背景，不叠加彩色光晕。 */
+.final-halo{display:none}
+body{background:radial-gradient(ellipse at 50% 55%,#291126 0%,#0c0713 60%,#030207 100%)}
